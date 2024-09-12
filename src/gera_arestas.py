@@ -4,26 +4,20 @@
 # Cria uma tupla contendo valores agrupados em em sub_tuplas,
 # representando o id dos vertices que possuem arestas
 import random
+import path
 
-## verifica se ja nao tem aresta entre os 2 vertices, e se os 2 numeros nao sao iguais
-# def verifica_adjacencia(arestas):
-#    pares_iguais = set()
-#    pares_repetidos = set()
-#    for i in range(len(arestas)):
-#       if arestas[i][0] == arestas[i][1]:
-#            pares_iguais.add(arestas[i])
-
-#       for j in range(i+1,len(arestas)):
-#          if arestas[i] == arestas[j]:
-#             pares_repetidos.add(arestas[i])
-
-#    if pares_iguais or pares_repetidos:
+def escreve_arquivo(caminho):
+   with open(caminho,"w") as arq:
+      arq.writelines(str(num_vertices) + '\n')
+      for valor in arestas:
+         linha = ' '.join(map(str,valor))
+         #print(linha)
+         arq.writelines(linha + '\n') 
 
 #Função que gera um valor diferente do passado como parâmetro
 # Útil nas ocasiões onde há arestas geradas repetidamente e/ou self-loop
 def gera_num_diferente(num_repetido):
    num = random.randint(1,num_vertices)
-
    while num == num_repetido:
       num = random.randint(1,num_vertices)
    return num  
@@ -43,6 +37,7 @@ def verifica_pares_repetidos(valores,num,i):
       
    return False   
 
+#Função para gerar os numeros aleatórios que representarão as arestas
 def gera_numeros(valores):
    for i in range(K):
      if i % 2 == 1: # Gera valor pro índice ímpar
@@ -56,26 +51,20 @@ def gera_numeros(valores):
 
      if i > 0 and valores[i - 1] == num: # Trata se há arestas repetidas
       num = gera_num_diferente(valores[i - 1])
-     print(num)
+
      valores.append(num)
 
     
             
 
-num_vertices = 8
-K = 26
+num_vertices = 100
+K = 200
 valores = []
 gera_numeros(valores)
 arestas = tuple((valores[i],valores[i+1]) for i in range(0,len(valores) - 1,2))
-print(arestas)
-#verifica_adjacencia(arestas)
-caminho = r'..\graph.txt'
-with open(caminho,"w") as arq:
-   arq.writelines(str(num_vertices) + '\n')
-   for valor in arestas:
-        linha = ' '.join(map(str,valor))
-        print(linha)
-        arq.writelines(linha + '\n')    
+#print(arestas)
+escreve_arquivo(path.caminho)
+   
 
        
 
