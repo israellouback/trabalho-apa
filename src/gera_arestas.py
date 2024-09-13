@@ -6,6 +6,7 @@
 import random
 import path
 
+#Função para escrever os vertices e arestas no txt
 def escreve_arquivo(caminho):
    with open(caminho,"w") as arq:
       arq.writelines(str(num_vertices) + '\n')
@@ -40,10 +41,10 @@ def verifica_pares_repetidos(valores,num,i):
 #Função para gerar os numeros aleatórios que representarão as arestas
 def gera_numeros(valores):
    for i in range(K):
-     if i % 2 == 1: # Gera valor pro índice ímpar
-      num = gera_num_diferente(valores[i - 1])
+     if i % 2 != 0: # Gera valor pro índice ímpar
+      num = gera_num_diferente(valores[i - 1]) 
       if i >= 3: 
-         while verifica_pares_repetidos(valores, num, i):
+         while verifica_pares_repetidos(valores, num, i): 
             num = gera_num_diferente(valores[i - 1])
 
      else:  # Índice par
@@ -54,15 +55,11 @@ def gera_numeros(valores):
 
      valores.append(num)
 
-    
-            
-
 num_vertices = 100
-K = 200
+K = 440
 valores = []
 gera_numeros(valores)
 arestas = tuple((valores[i],valores[i+1]) for i in range(0,len(valores) - 1,2))
-#print(arestas)
 escreve_arquivo(path.caminho)
    
 

@@ -39,9 +39,9 @@ def add_arestas():
 Grafo = nx.Graph()
 add_vertices()
 add_arestas()
-#plota_grafo()
+plota_grafo()
 matriz = matriz_binaria_adjacencia()
-plota_matriz()
+#plota_matriz()
 
 #n_vertices = Grafo.number_of_nodes()
 #n_arestas = Grafo.number_of_edges()
