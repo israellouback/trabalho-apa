@@ -1,6 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
-import graph
 
 # Defina a matriz que você deseja converter em uma imagem
 def plota_matriz(matrix):
@@ -26,7 +25,7 @@ def plota_matriz(matrix):
     index_color = 'blue'
 
     # Desenhe os índices das colunas no topo
-    for j in range(num_cols):
+    for j in range(num_rows):
             x = (j + 1) * cell_size
             text = f'V{j + 1}'
             text_bbox = draw.textbbox((x, 0), text, font=font)
