@@ -3,6 +3,7 @@ import path
 import numpy as np
 import matplotlib.pyplot as plt
 import plots
+import gera_arestas
 
 
 def plota_matriz():
@@ -12,28 +13,34 @@ def plota_grafo():
   nx.draw(Grafo,with_labels=True)
   plt.show()
 
-def vetor_compacto_gera_vetor_binario(vet_c):
-  N = len(vet_c)
-  vetor_binario = np.zeros(N)
+def vetcompac_gera_vetbin(vet_c,vetor_binario):
   for i in range(len(vet_c)):
     vetor_binario[i] = 1
-
   return vetor_binario
 
+def vetor_compacto_gera_matriz(vet_c):
+  matriz_adj = np.zeros((N,N))
+  TAM = (N * (N-1) ) / 2      #atualiza tamanho da matriz da parte triangular superior
+  vetor_binario = np.zeros(TAM)
+  vetor_binario = vetcompac_gera_vetbin(vet_c,vetor_binario)
+  i = 0
+  j = 0
+  for k in range(TAM): #4950
+    matriz_adj[i][j] = vetor_binario[k] 
+    j = j + 1
+    if (j == len(N-1)):     # N OU N-1
+      i = i + 1         
+      j = i           
 
-
-
+### TERMINAR###
 def vetor_gera_matriz(vet_c):
   N = len(vet_c)
   matriz_adj = np.zeros((N,N))
 
-
-
-
   return matriz_adj
 
 def matriz_adjacencia_bin():
-  matriz_adj = np.zeros((100,100))
+  matriz_adj = np.zeros((N,N))
   for id1 in Grafo.nodes:
     for id2 in Grafo.nodes:
       if Grafo.has_edge(id1,id2):
@@ -81,9 +88,11 @@ add_vertices()
 add_arestas()
 print(f'Grafo criado com {Grafo.number_of_nodes()} vértices e {Grafo.number_of_edges()} arestas!')
 #plota_grafo()
+N=len(gera_arestas.num_vertices)
 matriz = matriz_adjacencia_bin()
 vet_bin = vetor_binario(matriz)
 vet_compac =  vetor_compactado(vet_bin)
+vetor_compacto_gera_matriz(vet_compac,N)
 #plots.plota_matriz(matriz)
 
 
