@@ -55,8 +55,8 @@ def gera_numeros(valores):
 
      valores.append(num)
 
-num_vertices = 100
-K = 440
+num_vertices = 6
+K = 12
 valores = []
 gera_numeros(valores)
 arestas = tuple((valores[i],valores[i+1]) for i in range(0,len(valores) - 1,2))
