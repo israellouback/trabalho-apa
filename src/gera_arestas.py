@@ -55,12 +55,12 @@ def gera_numeros(valores):
 
      valores.append(num)
 
-num_vertices = 6
-K = 12
+num_vertices = 100
+K = 400
 valores = []
 gera_numeros(valores)
 arestas = tuple((valores[i],valores[i+1]) for i in range(0,len(valores) - 1,2))
-escreve_arquivo(path.caminho)
+escreve_arquivo(path.caminho1)
    
 
        

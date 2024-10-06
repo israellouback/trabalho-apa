@@ -25,27 +25,27 @@ def plota_matriz(matrix):
 
     # Desenhe os índices das colunas no topo
     for j in range(num_rows):
-            x = (j + 1) * cell_size
-            text = f'V{j + 1}'
-            text_bbox = draw.textbbox((x, 0), text, font=font)
+        x = (j + 1) * cell_size
+        text = f'V{j + 1}'
+        text_bbox = draw.textbbox((x, 0), text, font=font)
+        text_width = text_bbox[2] - text_bbox[0]
+        text_height = text_bbox[3] - text_bbox[1]
+        text_x = x + (cell_size - text_width) / 2
+        text_y = (cell_size - text_height) / 2
+        draw.text((text_x, text_y), text, fill=index_color, font=font)
+
+        # Desenhe os índices das linhas à esquerda
+        for i in range(num_cols):
+            y = (i + 1) * cell_size
+            text = f'V{i + 1}'
+            text_bbox = draw.textbbox((0, y), text, font=font)
             text_width = text_bbox[2] - text_bbox[0]
             text_height = text_bbox[3] - text_bbox[1]
-            text_x = x + (cell_size - text_width) / 2
-            text_y = (cell_size - text_height) / 2
+            text_x = (cell_size - text_width) / 2
+            text_y = y + (cell_size - text_height) / 2
             draw.text((text_x, text_y), text, fill=index_color, font=font)
 
-            # Desenhe os índices das linhas à esquerda
-            for i in range(num_cols):
-                y = (i + 1) * cell_size
-                text = f'V{i + 1}'
-                text_bbox = draw.textbbox((0, y), text, font=font)
-                text_width = text_bbox[2] - text_bbox[0]
-                text_height = text_bbox[3] - text_bbox[1]
-                text_x = (cell_size - text_width) / 2
-                text_y = y + (cell_size - text_height) / 2
-                draw.text((text_x, text_y), text, fill=index_color, font=font)
-
-            # Desenhe a matriz na imagem
+    # Desenhe a matriz na imagem
             for i in range(num_rows):
                 for j in range(num_cols):
                     # Calcule as coordenadas da célula
