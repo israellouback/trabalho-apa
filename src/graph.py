@@ -42,14 +42,12 @@ def prod_interseccao(v1,v2):
   for i in v1:
       if i in v1 and i in v2:
         vres.append(i)
-
   vres.sort()
   print(f'Interseccao dos vetores: {vres}') 
 
 def imprime_mapeamento_inverso(i,j,k):
   print(f'Dado o índice [{k}] do vetor compactado, a posição correspondente na matriz é: [{i},{j}] '+ '\n')
   print(f'Na posiçao [{k}] do vetor compactado o elemento é {vet_bin[vet_compac[k]]} e na posição [{i},{j}] da matriz, o elemento é {matriz[i][j]} '+ '\n')
-
 
 def mapeamento_iterativo_inverso(k,N):
   print('|| PROCEDIMENTO ITERATIVO ||'+ '\n')
@@ -147,7 +145,6 @@ def vetor_compacto_gera_matriz():
         i = i + 1         
         j = i + 1 
   #plota_matriz(matriz_adj)
-  print(matriz_adj)
 
 def matriz_adjacencia_bin(Grafo):
   matriz_adj = np.zeros((N,N))
@@ -205,23 +202,23 @@ plota_grafo()
 N = 100    # Numero de vértices ( dimensao da matriz )
 TAM = int((N * (N-1) ) / 2)      #Tamanho do vetor binario (parte triangular superior da matriz) 
 matriz = matriz_adjacencia_bin(Grafo)
-""" vet_bin = vetor_binario(matriz)        #plotar vet bin e vetor compactado ??
+vet_bin = vetor_binario(matriz)        #plotar vet bin e vetor compactado ??
 vet_compac =  vetor_compactado(vet_bin)
-vetor_compacto_gera_matriz()
-mapeamento_matriz_vetor()
-mapeamento_inverso()
-Grafo2 = nx.Graph()s
-add_vertices(Grafo2,path.caminho2)
-add_arestas(Grafo2,path.caminho2)
-print(f'Grafo 2 criado com {Grafo2.number_of_nodes()} vértices e {Grafo2.number_of_edges()} arestas!')
-matriz2 = matriz_adjacencia_bin(Grafo2)
-vet_bin2 = vetor_binario(matriz2)
-vet_compac2 = vetor_compactado(vet_bin2)
-soma_uniao(vet_compac,vet_compac2)  
-prod_interseccao(vet_compac,vet_compac2) """
+# vetor_compacto_gera_matriz()
+# mapeamento_matriz_vetor()
+# mapeamento_inverso()
+# Grafo2 = nx.Graph()
+# add_vertices(Grafo2,path.caminho2)
+# add_arestas(Grafo2,path.caminho2)
+# print(f'Grafo 2 criado com {Grafo2.number_of_nodes()} vértices e {Grafo2.number_of_edges()} arestas!')
+# matriz2 = matriz_adjacencia_bin(Grafo2)
+# vet_bin2 = vetor_binario(matriz2)
+# vet_compac2 = vetor_compactado(vet_bin2)
+# soma_uniao(vet_compac,vet_compac2)  
+# prod_interseccao(vet_compac,vet_compac2)
 
-#plota_vetor(vet_compac,0)
-#plota_vetor(vet_bin,1)
+plota_vetor(vet_compac,0)
+plota_vetor(vet_bin,1)
 
 
 
