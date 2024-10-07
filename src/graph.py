@@ -15,6 +15,24 @@ def plota_grafo():
   nx.draw(Grafo,with_labels=True)
   plt.show()
 
+def imprime_mapeamento_inverso(i,j,k):
+  print(f'Dado o índice [{k}] do vetor compactado, a posição correspondente na matriz é: [{i-1},{j}] '+ '\n')
+  print(f'Na posiçao [{k}] do vetor compactado o elemento é {vet_bin[vet_compac[k]]} e na posição [{i-1},{j}] da matriz, o elemento é {matriz[i][j]} '+ '\n')
+
+def imprime_mapeamento(i,j,mapeamento):
+  print(f'Dada os índices [{i},{j}] da matriz, a posição correspondente no vetor é [{mapeamento-1}]'+ '\n')
+  print(f'Na posiçao [{i},{j}] da matriz, o elemento é {matriz[i][j]}, e na posição [{mapeamento-1}] do vetor o elemento é {vet_bin[mapeamento]}'+ '\n')
+
+def prod_interseccao(v1,v2):
+  vres = []
+  print(f'Vetor 1: {v1}'+ '\n')  
+  print(f'Vetor 2: {v2}'+ '\n')  
+  for i in v1:
+      if i in v2:
+        vres.append(i)
+  vres.sort()
+  print(f'Interseccao dos vetores: {vres}'+ '\n') 
+
 def soma_uniao(v1,v2):
   vres = []
   i,j =0,0
@@ -31,23 +49,10 @@ def soma_uniao(v1,v2):
       j = j + 1
   #vres.extend(v1[i:])    
   #vres.extend(v2[j:])
-  print(f'Vetor 1: {v1}')  
-  print(f'Vetor 2: {v2}')  
-  print(f'União dos vetores: {vres}')    
+  print(f'Vetor 1: {v1}' + '\n')  
+  print(f'Vetor 2: {v2}' + '\n')  
+  print(f'União dos vetores: {vres}' + '\n')    
       
-def prod_interseccao(v1,v2):
-  vres = []
-  print(f'Vetor 1: {v1}')  
-  print(f'Vetor 2: {v2}')  
-  for i in v1:
-      if i in v1 and i in v2:
-        vres.append(i)
-  vres.sort()
-  print(f'Interseccao dos vetores: {vres}') 
-
-def imprime_mapeamento_inverso(i,j,k):
-  print(f'Dado o índice [{k}] do vetor compactado, a posição correspondente na matriz é: [{i},{j}] '+ '\n')
-  print(f'Na posiçao [{k}] do vetor compactado o elemento é {vet_bin[vet_compac[k]]} e na posição [{i},{j}] da matriz, o elemento é {matriz[i][j]} '+ '\n')
 
 def mapeamento_iterativo_inverso(k,N):
   print('|| PROCEDIMENTO ITERATIVO ||'+ '\n')
@@ -57,7 +62,6 @@ def mapeamento_iterativo_inverso(k,N):
     indice = indice - (N-i-1)
     i = i + 1
   j = i + indice + 1 
-  print(f'i = {i} e j = {j}')
   imprime_mapeamento_inverso(i,j,k)
 
 def mapeamento_inverso():
@@ -76,15 +80,8 @@ def mapeamento_inverso():
     indice = indice - (N-i-1)
     i = i + 1
   j = i + indice + 1 
-  print(f'i = {i} e j = {j}')
   imprime_mapeamento_inverso(i,j,k)
   mapeamento_iterativo_inverso(k,N)
-
-
-def imprime_mapeamento(i,j,mapeamento):
-  print(f'Dada os índices [{i},{j}] da matriz, a posição correspondente no vetor é [{mapeamento}]'+ '\n')
-  print(f'Na posiçao [{i},{j}] da matriz, o elemento é {matriz[i][j]}, e na posição [{mapeamento}] do vetor o elemento é {vet_bin[mapeamento]}'+ '\n')
-
 
 def mapeamento_recursivo(i,j,N):
   if i == 0:
@@ -134,7 +131,6 @@ def vetor_compacto_gera_matriz():
   matriz_adj = np.zeros((N,N))
   vetor_binario = np.zeros(TAM)
   vetor_binario = vetcompac_gera_vetbin(vet_compac,vetor_binario)
-  print(vetor_binario)
   i = 0
   j = 1
   for k in vetor_binario: #4950
@@ -144,17 +140,17 @@ def vetor_compacto_gera_matriz():
     if (j == (N)):     
         i = i + 1         
         j = i + 1 
-  #plota_matriz(matriz_adj)
-
-def matriz_adjacencia_bin(Grafo):
-  matriz_adj = np.zeros((N,N))
-  for id1 in Grafo.nodes:
-    for id2 in Grafo.nodes:
-      if Grafo.has_edge(id1,id2):
-          matriz_adj[id1 -1 ,id2 - 1] = 1  
-  print('Matriz de adj:' +'\n' +f'{matriz_adj}' + '\n')
   plota_matriz(matriz_adj)
-  return matriz_adj
+
+
+def vetor_compactado(vetor_binario):
+  vet_c = []
+  for i in range(len(vetor_binario)):
+    if vetor_binario[i] == 1:
+      vet_c.append(i)
+
+  print(f'Vetor Compactado: {vet_c}' + ' \n')
+  return vet_c  
 
 
 def vetor_binario(matriz):
@@ -168,14 +164,16 @@ def vetor_binario(matriz):
   return vetor_bin   
 
 
-def vetor_compactado(vetor_binario):
-  vet_c = []
-  for i in range(len(vetor_binario)):
-    if vetor_binario[i] == 1:
-      vet_c.append(i)
+def matriz_adjacencia_bin(Grafo):
+  matriz_adj = np.zeros((N,N))
+  for id1 in Grafo.nodes:
+    for id2 in Grafo.nodes:
+      if Grafo.has_edge(id1,id2):
+          matriz_adj[id1 -1 ,id2 - 1] = 1  
+  print('Matriz de adj:' +'\n' +f'{matriz_adj}' + '\n')
+  plota_matriz(matriz_adj)
+  return matriz_adj
 
-  print(f'Vetor Compactado: {vet_c}' + ' \n')
-  return vet_c    
 
 #Função para adicionar os vertices do grafo
 def add_vertices(Grafo,caminho):
@@ -204,21 +202,22 @@ TAM = int((N * (N-1) ) / 2)      #Tamanho do vetor binario (parte triangular sup
 matriz = matriz_adjacencia_bin(Grafo)
 vet_bin = vetor_binario(matriz)        #plotar vet bin e vetor compactado ??
 vet_compac =  vetor_compactado(vet_bin)
-# vetor_compacto_gera_matriz()
-# mapeamento_matriz_vetor()
-# mapeamento_inverso()
-# Grafo2 = nx.Graph()
-# add_vertices(Grafo2,path.caminho2)
-# add_arestas(Grafo2,path.caminho2)
-# print(f'Grafo 2 criado com {Grafo2.number_of_nodes()} vértices e {Grafo2.number_of_edges()} arestas!')
-# matriz2 = matriz_adjacencia_bin(Grafo2)
-# vet_bin2 = vetor_binario(matriz2)
-# vet_compac2 = vetor_compactado(vet_bin2)
-# soma_uniao(vet_compac,vet_compac2)  
-# prod_interseccao(vet_compac,vet_compac2)
-
 plota_vetor(vet_compac,0)
 plota_vetor(vet_bin,1)
+vetor_compacto_gera_matriz()
+mapeamento_matriz_vetor()
+mapeamento_inverso()
+h = int(input('Pressione H para continuar:'))
+Grafo2 = nx.Graph()
+add_vertices(Grafo2,path.caminho2)
+add_arestas(Grafo2,path.caminho2)
+print(f'Grafo 2 criado com {Grafo2.number_of_nodes()} vértices e {Grafo2.number_of_edges()} arestas!')
+matriz2 = matriz_adjacencia_bin(Grafo2)
+vet_bin2 = vetor_binario(matriz2)
+vet_compac2 = vetor_compactado(vet_bin2)
+soma_uniao(vet_compac,vet_compac2)  
+prod_interseccao(vet_compac,vet_compac2)
+
 
 
 
